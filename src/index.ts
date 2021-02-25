@@ -1,10 +1,10 @@
-import * as UserAPI from './UserAPI'; //
-
-import * as ModelLibraryAPI from './ModelLibraryAPI'; //
+import ModelLibraryAPI from './ModelLibraryAPI'; //
 
 import NewsAPI from './NewsAPI'; //
 
 import DiscoveryAPI from './DiscoveryAPI'; //
+
+import * as UserAPI from './UserAPI'; //
 
 import * as API from './API';
 

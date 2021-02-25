@@ -1,8 +1,7 @@
 import HttpUtils2 from './HttpUtils2';
 import { baseURL } from './url';
-import { SignInSuccess } from './types';
+import { SignInSuccess, Source_Cat } from './types';
 import { objectToQueryStr } from './utils';
-import { Source_Cat } from './NewsAPI/types';
 import { ReplyComment } from './NewsAPI/NewsAPI';
 
 // type Platform = 'wechat' | 'apple';

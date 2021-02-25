@@ -1,7 +1,8 @@
 import HttpUtils2 from '../HttpUtils2';
 import { baseURL, baseSearchURL } from '../url';
 import { objectToQueryStr } from '../utils';
-import { ComplexType, Source_Cat } from './types';
+import { ComplexType } from './types';
+import { Source_Cat } from '../types';
 
 export type ComplexType1 = ComplexType;
 

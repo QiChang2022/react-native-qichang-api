@@ -1,7 +1,7 @@
-import HttpUtils2 from './HttpUtils2';
-import { baseURL } from './url';
-import { objectToQueryStr } from './utils';
-import { Source_Cat } from './NewsAPI/types';
+import HttpUtils2 from '../HttpUtils2';
+import { baseURL } from '../url';
+import { objectToQueryStr } from '../utils';
+import { Source_Cat } from '../types';
 
 export type IndexEntryExtra = {
     min_price?: string;
