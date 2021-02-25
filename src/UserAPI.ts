@@ -1,9 +1,9 @@
 import HttpUtils2 from './HttpUtils2';
 import { baseURL } from './url';
-import type { SignInSuccess } from './types';
+import { SignInSuccess } from './types';
 import { objectToQueryStr } from './utils';
-import type { Source_Cat } from './NewsAPI/types';
-import type { ReplyComment } from './NewsAPI/NewsAPI';
+import { Source_Cat } from './NewsAPI/types';
+import { ReplyComment } from './NewsAPI/NewsAPI';
 
 // type Platform = 'wechat' | 'apple';
 // type ThirdPlatformData = { appleId: string; identityToken: string } | {};
