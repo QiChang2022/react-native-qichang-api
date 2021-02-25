@@ -15,7 +15,6 @@ import QichangApi from "react-native-qichang-api";
 
 // ...
 
-const result = await QichangApi.multiply(3, 7);
 ```
 
 ## Contributing
