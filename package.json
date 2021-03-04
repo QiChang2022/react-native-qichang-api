@@ -1,6 +1,6 @@
 {
   "name": "react-native-qichang-api",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "汽场App api",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -78,7 +78,9 @@
       "<rootDir>/example/node_modules",
       "<rootDir>/lib"
     ],
-    "setupFiles": ["./setupJest.js"]
+    "setupFiles": [
+      "./setupJest.js"
+    ]
   },
   "husky": {
     "hooks": {
