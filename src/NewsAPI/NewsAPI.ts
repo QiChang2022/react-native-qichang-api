@@ -24,7 +24,7 @@ export async function getLivingList(): Promise<
 /**
  * 获取栏目
  */
-export async function getColumnListData() {
+export async function getColumnListData(): Promise<Array<any>> {
     const url = baseURL + '/cp?code=app_news_index_menu';
     const result = await HttpUtils2.get(url);
     return result.code === 200 ? result.data.entries : Promise.reject(result);

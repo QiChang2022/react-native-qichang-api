@@ -4,21 +4,12 @@ import { SignInSuccess, Source_Cat } from './types';
 import { objectToQueryStr } from './utils';
 import { ReplyComment } from './NewsAPI/NewsAPI';
 
-// type Platform = 'wechat' | 'apple';
-// type ThirdPlatformData = { appleId: string; identityToken: string } | {};
-// export async function loginWithThirdPlatform(platform: Platform, data: ThirdPlatformData) {
-//     if (platform == 'apple') {
-//         //return loginWithThirdPlatformAppleID()
-//     }
-// }
-
 type SignInResponse = { msg: string; code: number; data: SignInSuccess | null };
 
 /**
  * 登录 使用手机号,验证码
  * @param phone
  * @param code
- *
  */
 export async function loginWithPhone(
     phone: string,
@@ -435,7 +426,7 @@ export async function getSystemNotificationList(
 }
 
 /**
- * 回复评论 ()
+ * 回复评论
  * @param to_type 1,楼: 直接回复评论  2层: 回复评论中的评论  @用户
  * @param comment_id
  * @param to_user_id
