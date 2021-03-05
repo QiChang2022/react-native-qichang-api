@@ -1,20 +1,62 @@
 import NewsAPI from '../NewsAPI';
-describe('NewsAPI', () => {
-    it('资讯栏目', async () => {
-        let columns = await NewsAPI.getColumnListData();
-        //console.log(columns);
-        //console.log(columns.map((x: any) => x.title));
+
+describe('资讯栏目', () => {
+    let columns: any[] = [];
+
+    beforeAll(async () => {
+        columns = await NewsAPI.getColumnListData();
+    });
+
+    afterAll(() => {
+        columns = [];
+    });
+
+    test('9个栏目', async () => {
         expect(columns.length).toBe(9);
+    });
+
+    test('包含 推荐', async () => {
+        let columnTitles = columns.map((x) => x.title);
+        expect(columnTitles).toContain('推荐');
     });
 });
 
 describe('直播', () => {
-    it('直播列表', async () => {
+    test('直播列表', async () => {
         let lives = await NewsAPI.getLiveList(0, 5);
         expect(lives.length).toBe(5);
     });
-    it('直播详情', async () => {
-        let live = await NewsAPI.getLiveDetailById(528);
-        console.log(live);
+    test('直播详情', async () => {
+        let live = await NewsAPI.getLiveDetailById(532);
+        expect(live.title).toBeDefined();
+    });
+});
+
+describe('直播详情 活动悬浮框', () => {
+    test('为空', async () => {
+        let live = await NewsAPI.getLiveDetailById(532);
+        expect(live.float_config).toEqual({});
+    });
+});
+
+describe('文章', () => {
+    test('精选文章列表', (done) => {
+        NewsAPI.getHomeSelectionList(1, 5).then((data) => {
+            try {
+                expect(data.length).toBe(5);
+                done();
+            } catch (error) {
+                done('error');
+            }
+        });
+    });
+
+    test('the fetch fails with an error', async () => {
+        expect.assertions(1);
+        try {
+            await NewsAPI.getNewsDetailById(-111);
+        } catch (e) {
+            expect(e).toMatchObject({ data: null });
+        }
     });
 });

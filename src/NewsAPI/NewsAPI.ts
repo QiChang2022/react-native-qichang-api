@@ -225,25 +225,22 @@ export async function getLiveDetailById(
     chat_room_url: string;
     chat_room_web_url: string;
 
-    // title:string,
-    // summary:string,
-    // tags:Array<string>,
-    // start_time:string,
-    // live_url:{
-    //     m3u8:string,
-    // },
-    // series_list:Array<any>,
-    // cover:string,
-    // record_url:string,
-    // chat_room_id:string,
-    // chat_room_url:string,
-    // chat_room_web_url:string,
+    float_config: //控制是否显示活动悬浮框
+    | {
+              source_id: number;
+              source_type: number;
+              status: number;
+              start_time: string;
+              end_time: string;
+              target_id: number;
+              target_type: number;
+              target_url: string;
+          }
+        | {};
 }> {
     const url = baseURL + '/live?id=' + id;
 
     const result = await HttpUtils2.get(url);
-
-    //result.data.chat_room_web_url = 'weblink04.netease.im:443';
 
     return result.code === 200 && result.data != null
         ? result.data

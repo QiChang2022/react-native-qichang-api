@@ -4,7 +4,6 @@ describe('API', () => {
         try {
             let res = await API.getStartScreenImage(1125, 2436);
             expect(res.title.length).toBeGreaterThan(0);
-            //expect(true).toBe(true)
         } catch (error) {
             //expect(true).toBe(false)
         }
