@@ -35,6 +35,7 @@ describe('直播', () => {
 describe('直播详情 活动悬浮框', () => {
     test('为空', async () => {
         let live = await NewsAPI.getLiveDetailById(532);
+        //console.log(live);
         expect(live.float_config).toEqual({});
     });
 });
@@ -58,5 +59,12 @@ describe('文章', () => {
         } catch (e) {
             expect(e).toMatchObject({ data: null });
         }
+    });
+});
+
+describe('文章详情', () => {
+    test('1', async () => {
+        let articleDetail = await NewsAPI.getNewsDetailById(48707);
+        expect(articleDetail.float_config).toEqual({});
     });
 });

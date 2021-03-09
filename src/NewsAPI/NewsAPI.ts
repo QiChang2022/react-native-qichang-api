@@ -1,7 +1,7 @@
 import HttpUtils2 from '../HttpUtils2';
 import { baseURL, baseSearchURL } from '../url';
 import { objectToQueryStr } from '../utils';
-import { ComplexType } from './types';
+import { ComplexType, LiveDetail, ArticleDetail, VideoDetail } from './types';
 import { Source_Cat } from '../types';
 
 export type ComplexType1 = ComplexType;
@@ -178,7 +178,7 @@ export async function getLiveList(
  * 获取新闻详情
  * @param id 新闻id
  */
-export async function getNewsDetailById(id: number): Promise<Array<any>> {
+export async function getNewsDetailById(id: number): Promise<ArticleDetail> {
     const url = baseURL + '/news?id=' + id;
     const result = await HttpUtils2.get(url);
     return result.code === 200 && result.data != null
@@ -190,7 +190,7 @@ export async function getNewsDetailById(id: number): Promise<Array<any>> {
  * 获取视频详情
  * @param id 视频id
  */
-export async function getVideoDetailById(id: number) {
+export async function getVideoDetailById(id: number): Promise<VideoDetail> {
     const url = baseURL + '/video?id=' + id;
 
     const result = await HttpUtils2.get(url);
@@ -204,40 +204,7 @@ export async function getVideoDetailById(id: number) {
  * 获取直播详情
  * @param id
  */
-export async function getLiveDetailById(
-    id: number
-): Promise<{
-    title: string;
-    summary: string;
-    tags: Array<string>;
-
-    start_time: string;
-    live_url: {
-        m3u8: string;
-    };
-    series_list: Array<any>;
-    cover: string;
-    record_url: string;
-    status: any;
-    record_status: any;
-
-    chat_room_id: string;
-    chat_room_url: string;
-    chat_room_web_url: string;
-
-    float_config: //控制是否显示活动悬浮框
-    | {
-              source_id: number;
-              source_type: number;
-              status: number;
-              start_time: string;
-              end_time: string;
-              target_id: number;
-              target_type: number;
-              target_url: string;
-          }
-        | {};
-}> {
+export async function getLiveDetailById(id: number): Promise<LiveDetail> {
     const url = baseURL + '/live?id=' + id;
 
     const result = await HttpUtils2.get(url);

@@ -58,3 +58,56 @@ export enum LayoutType {
     qichanghao_large_image = 52, // 汽场号大图
     subject = 61, //专题
 }
+
+type FloatConfig =
+    | {
+          source_id: number;
+          source_type: number;
+          status: number;
+          float_url: string; //图片地址
+          start_time: string;
+          end_time: string;
+          target: {
+              target_id: number;
+              target_type: number; //调整类型
+              target_url: string; //跳转url
+              start_time: string;
+              end_time: string;
+          };
+      }
+    | {};
+
+//直播详情
+export type LiveDetail = {
+    title: string;
+    summary: string;
+    tags: Array<string>;
+
+    start_time: string;
+    live_url: {
+        m3u8: string;
+    };
+    series_list: Array<any>;
+    cover: string;
+    record_url: string;
+    status: any;
+    record_status: any;
+
+    chat_room_id: string;
+    chat_room_url: string;
+    chat_room_web_url: string;
+
+    float_config: FloatConfig; //控制是否显示活动悬浮框
+};
+
+//文章详情
+export type ArticleDetail = {
+    id: number;
+    title: string;
+    summary: string;
+    cover: string;
+    tags: Array<string>;
+} & { float_config: FloatConfig };
+
+//视频详情
+export type VideoDetail = any & { float_config: FloatConfig };
