@@ -2,7 +2,7 @@ import { Platform, DeviceEventEmitter } from 'react-native';
 
 let headers = {
     'User-Token': '',
-    'User-Source': '',
+    'User-Source': 'qcv_app',
     'app-version': '', //App版本号
     'device-type': '',
     'system-version': '', //系统版本
