@@ -41,6 +41,26 @@ export type ComplexType = {
     status: 1 | 2 | 3;
 };
 
+export type Video = {
+    id: number;
+    title: string;
+    cover: string;
+    url: string;
+    duration: string;
+    user: {
+        face: string;
+        name: string;
+        id: number;
+    };
+    amount: {
+        top: number;
+        collect: number;
+        comment: number;
+        share: number;
+        browse: number;
+    };
+};
+
 //布局类型
 export enum LayoutType {
     nothing = 0, //无

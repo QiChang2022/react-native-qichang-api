@@ -1,7 +1,13 @@
 import * as HttpUtils from '../HttpUtils';
 import { baseURL, baseSearchURL } from '../url';
 import { objectToQueryStr } from '../utils';
-import { ComplexType, LiveDetail, ArticleDetail, VideoDetail } from './types';
+import {
+    ComplexType,
+    LiveDetail,
+    ArticleDetail,
+    VideoDetail,
+    Video,
+} from './types';
 import { Source_Cat } from '../types';
 
 export type ComplexType1 = ComplexType;
@@ -32,13 +38,13 @@ export async function getColumnListData(): Promise<Array<any>> {
 
 /**
  * 获取视频列表
- * @param page
+ * @param page : 1 开始
  * @param page_size
  */
 export async function getVideoList(
     page: number,
     page_size: number
-): Promise<Array<any>> {
+): Promise<Array<Video>> {
     const url = baseURL + '/video/list' + objectToQueryStr({ page, page_size });
 
     const result = await HttpUtils.get(url);
