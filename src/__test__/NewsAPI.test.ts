@@ -1,3 +1,4 @@
+import { Source_Cat } from '../types';
 import NewsAPI from '../NewsAPI';
 
 describe('资讯栏目', () => {
@@ -32,14 +33,6 @@ describe('直播', () => {
     });
 });
 
-describe('直播详情 活动悬浮框', () => {
-    test('为空', async () => {
-        let live = await NewsAPI.getLiveDetailById(532);
-        //console.log(live);
-        expect(live.float_config).toEqual({});
-    });
-});
-
 describe('文章', () => {
     test('精选文章列表', (done) => {
         NewsAPI.getHomeSelectionList(1, 5).then((data) => {
@@ -62,9 +55,28 @@ describe('文章', () => {
     });
 });
 
-describe('文章详情', () => {
-    test('1', async () => {
+describe('详情 活动悬浮框', () => {
+    function testFloatConfig(data: any) {
+        if ('target' in data.float_config) {
+            expect(data.float_config.target).not.toBeNull();
+            expect(data.float_config.target.target_type).toBe(Source_Cat.ad);
+        } else {
+            expect(data.float_config).toEqual({});
+        }
+    }
+
+    test('文章详情 活动悬浮框', async () => {
         let articleDetail = await NewsAPI.getNewsDetailById(48707);
-        expect(articleDetail.float_config).toEqual({});
+        testFloatConfig(articleDetail);
+    });
+
+    test('直播详情 活动悬浮框', async () => {
+        let live = await NewsAPI.getLiveDetailById(534);
+        testFloatConfig(live);
+    });
+
+    test('视频详情 活动悬浮框', async () => {
+        let videoDetail = await NewsAPI.getVideoDetailById(1383);
+        testFloatConfig(videoDetail);
     });
 });

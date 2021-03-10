@@ -68,8 +68,8 @@ type FloatConfig =
           start_time: string;
           end_time: string;
           target: {
-              target_id: number;
-              target_type: number; //调整类型
+              target_id: number; //id
+              target_type: number; //跳转类型 广告类型
               target_url: string; //跳转url
               start_time: string;
               end_time: string;
