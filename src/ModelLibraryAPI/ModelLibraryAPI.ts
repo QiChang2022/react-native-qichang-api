@@ -1,4 +1,4 @@
-import HttpUtils2 from '../HttpUtils2';
+import * as HttpUtils from '../HttpUtils';
 import { baseURL } from '../url';
 import { objectToQueryStr } from '../utils';
 import { Source_Cat } from '../types';
@@ -46,7 +46,7 @@ export type HandledIndexEntry = {
     jumpItem: JumpItem;
 };
 
-const requestURL = async (url: string) => await HttpUtils2.get(url);
+const requestURL = async (url: string) => await HttpUtils.get(url);
 
 const index_url_code = {
     swiper: 'qcv_app_index_slide', //首页轮播图
@@ -207,7 +207,7 @@ export async function request_brandHotRankings(url: string) {
 export async function request_newCarList() {
     const url = baseURL + '/cars/new_launch';
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data : Promise.reject();
 }
@@ -218,7 +218,7 @@ export async function request_newCarList() {
 export async function request_newCarComingList() {
     const url = baseURL + '/cars/new_publish';
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 && result.data && result.data.length > 0
         ? result.data
@@ -231,7 +231,7 @@ export async function request_newCarComingList() {
  */
 export async function fetchAllBrands() {
     const url = baseURL + '/cars/brands';
-    let result = await HttpUtils2.get(url);
+    let result = await HttpUtils.get(url);
     return result.code === 200 ? result.data : [];
 }
 
@@ -244,7 +244,7 @@ export async function fetchAllBrands() {
 export async function request_carModelImages(model_id?: number) {
     const url = baseURL + `/cars/model_pic?model_id=${model_id}`;
 
-    let data = await HttpUtils2.get(url);
+    let data = await HttpUtils.get(url);
 
     return data.code === 200 ? data.data : Promise.reject(data);
 }
@@ -258,7 +258,7 @@ export async function request_carModelImages(model_id?: number) {
 export async function request_carSeriesImages(series_id?: number) {
     const url = baseURL + `/cars/model_pic?series_id=${series_id}`;
 
-    let data = await HttpUtils2.get(url);
+    let data = await HttpUtils.get(url);
 
     return data.code === 200 ? data.data : Promise.reject(data);
 }
@@ -293,7 +293,7 @@ export async function v3request_carModelFilter(
             price_max,
         });
 
-    let result = await HttpUtils2.get(url);
+    let result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data.list : [];
 }
@@ -317,7 +317,7 @@ export async function v3request_carDealers(
         baseURL +
         `/cars/dealer?series_id=${series_id}&area_id=${area_id}&lon=${lon}&lat=${lat}`;
 
-    let result = await HttpUtils2.get(url);
+    let result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data : [];
 }

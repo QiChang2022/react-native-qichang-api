@@ -1,4 +1,4 @@
-import HttpUtils2 from './HttpUtils2';
+import * as HttpUtils from './HttpUtils';
 import { baseURL } from './url';
 import { objectToQueryStr } from './utils';
 
@@ -21,7 +21,7 @@ export async function getStartScreenImage(
         '/cp/os_ad' +
         objectToQueryStr({ w: screenWidth, h: screenHeight });
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 && result.data != null
         ? result.data
@@ -52,7 +52,7 @@ export async function getStartAd(): Promise<{
 }> {
     const url = baseURL + '/index/sync';
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data : Promise.reject(result);
 }

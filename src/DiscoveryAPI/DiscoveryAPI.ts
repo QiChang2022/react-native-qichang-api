@@ -1,4 +1,4 @@
-import HttpUtils2 from '../HttpUtils2';
+import * as HttpUtils from '../HttpUtils';
 import { baseURL } from '../url';
 import { objectToQueryStr } from '../utils';
 
@@ -16,7 +16,7 @@ export async function getQichanghaoRankingList(
         `/user/rank/cat/list` +
         objectToQueryStr({ record_type, rank_type });
 
-    let result = await HttpUtils2.get(url);
+    let result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data.list : [];
 }
@@ -39,7 +39,7 @@ export async function getQichanghaoRankingData(
 
     const url = baseURL + `/user/rank/list` + params;
 
-    let result = await HttpUtils2.get(url);
+    let result = await HttpUtils.get(url);
 
     return result.code === 200 &&
         result.data.list &&
@@ -56,7 +56,7 @@ export async function getQichanghaoRankingDetail(rank_cat_id: number) {
     const url =
         baseURL + `/user/rank/detail` + objectToQueryStr({ rank_cat_id });
 
-    let result = await HttpUtils2.get(url);
+    let result = await HttpUtils.get(url);
 
     return result.code === 200 && result.data
         ? result.data
@@ -69,7 +69,7 @@ export async function getQichanghaoRankingDetail(rank_cat_id: number) {
 export async function getDiscoverData() {
     const url = baseURL + '/discovery/index';
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data : Promise.reject(result);
 }
@@ -87,7 +87,7 @@ export async function getQichanghaoRanking(): Promise<
 > {
     const url = baseURL + '/cp?code=qcv_app_discovery_media';
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200
         ? result.data.entries.map((item: any) => ({
@@ -128,7 +128,7 @@ export async function getArticleColumnListData(
             code: 'qcv_app_discovery_news_cat',
         });
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200
         ? result.data.entry.data
@@ -156,7 +156,7 @@ export async function getArticleColumnDetail(
             code: 'qcv_app_discovery_news_cat',
         });
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200
         ? result.data.entry.user || {}
@@ -184,7 +184,7 @@ export async function getVideoColumnDetail(
             code: 'qcv_app_discovery_video_cat',
         });
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200
         ? result.data.entry.user || {}
@@ -220,7 +220,7 @@ export async function getVideoColumnListData(
             code: 'qcv_app_discovery_video_cat',
         });
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200
         ? result.data.entry.data

@@ -1,4 +1,4 @@
-import HttpUtils2 from './HttpUtils2';
+import * as HttpUtils from './HttpUtils';
 import { baseURL } from './url';
 import { SignInSuccess, Source_Cat } from './types';
 import { objectToQueryStr } from './utils';
@@ -17,7 +17,7 @@ export async function loginWithPhone(
 ): Promise<SignInResponse> {
     const url = baseURL + '/login';
 
-    return await HttpUtils2.post(url, { phone, code });
+    return await HttpUtils.post(url, { phone, code });
 }
 
 /**
@@ -33,7 +33,7 @@ export async function loginWithThirdPlatformApple(
 ): Promise<SignInResponse> {
     const url = baseURL + '/apple_login';
 
-    const res = await HttpUtils2.post(url, {
+    const res = await HttpUtils.post(url, {
         apple_id: appleId,
         token: identityToken,
     });
@@ -53,7 +53,7 @@ export async function loginWithThirdPlatformWechat(
     unionid: string
 ): Promise<SignInResponse> {
     const url = baseURL + '/third_login';
-    return await HttpUtils2.post(url, { openid, unionid });
+    return await HttpUtils.post(url, { openid, unionid });
 }
 
 /**
@@ -79,7 +79,7 @@ export async function bindPhoneWithWechat(
 
     const url = baseURL + '/third_reg';
 
-    const res = await HttpUtils2.post(url, params);
+    const res = await HttpUtils.post(url, params);
 
     if (res.code === 200 && res.data) {
         res.data.is_bind_wx = true; //fix 结果没有is_bind_wx字段的问题
@@ -105,7 +105,7 @@ export async function bindPhoneWithApple(
 
     const url = baseURL + '/apple/register';
 
-    const res = await HttpUtils2.post(url, params);
+    const res = await HttpUtils.post(url, params);
 
     if (res.code === 200) {
         return res;
@@ -120,7 +120,7 @@ export async function bindPhoneWithApple(
 export async function unbindWechat(): Promise<Boolean> {
     const url = baseURL + '/user/un_bind/wechat';
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 ? true : false;
 }
@@ -133,7 +133,7 @@ export async function unbindWechat(): Promise<Boolean> {
 export async function bindWechat(openid: string, unionid: string) {
     const url = baseURL + '/user/bind/wechat';
 
-    const result = await HttpUtils2.post(url, { openid, unionid });
+    const result = await HttpUtils.post(url, { openid, unionid });
 
     return result.code === 200 ? true : Promise.reject(result);
 }
@@ -146,7 +146,7 @@ export async function bindWechat(openid: string, unionid: string) {
 export async function bindApple(appleId: string, token: string | null) {
     const url = baseURL + '/apple_bind';
 
-    const res = await HttpUtils2.post(url, { apple_id: appleId, token: token });
+    const res = await HttpUtils.post(url, { apple_id: appleId, token: token });
 
     return res.code === 200 ? true : Promise.reject(res);
 }
@@ -157,7 +157,7 @@ export async function bindApple(appleId: string, token: string | null) {
 export async function unbindApple() {
     const url = baseURL + '/apple_unbind';
 
-    const res = await HttpUtils2.get(url);
+    const res = await HttpUtils.get(url);
 
     return res.code === 200 ? true : Promise.reject(res);
 }
@@ -173,7 +173,7 @@ export async function bindPhone(
 ): Promise<SignInResponse> {
     const url = baseURL + '/user/bind/phone';
 
-    const result = await HttpUtils2.post(url, { phone, code });
+    const result = await HttpUtils.post(url, { phone, code });
 
     return result.code === 200 ? result : Promise.reject(result);
 }
@@ -191,7 +191,7 @@ export async function updateUserInfo(userInfo: {
 }): Promise<boolean> {
     const url = baseURL + '/user/complete';
 
-    const result = await HttpUtils2.post(url, { ...userInfo });
+    const result = await HttpUtils.post(url, { ...userInfo });
 
     return result.code === 200 ? true : Promise.reject(result);
 }
@@ -203,7 +203,7 @@ export async function updateUserInfo(userInfo: {
 export async function uploadUserAvatar(imagePath: string) {
     const url = baseURL + '/public/image/upload';
 
-    const result = await HttpUtils2.uploadFile(url, imagePath);
+    const result = await HttpUtils.uploadFile(url, imagePath);
 
     if (result.code === 200) {
         return result.data;
@@ -233,7 +233,7 @@ export async function getPhoneCode(
 ): Promise<any> {
     const query = { phone, code, cat };
     const url = baseURL + '/public/sms';
-    return await HttpUtils2.post(url, query);
+    return await HttpUtils.post(url, query);
 }
 
 /**
@@ -244,7 +244,7 @@ export async function getPhoneCode(
 export async function changePhone_VerifyOldPhone(phone: string, code: string) {
     const url = baseURL + '/user/exchange/phone';
 
-    const result = await HttpUtils2.post(url, { phone, code, step: '1' });
+    const result = await HttpUtils.post(url, { phone, code, step: '1' });
 
     console.log(result);
 
@@ -266,7 +266,7 @@ export async function changePhone_VerifyNewPhone(
 ) {
     const url = baseURL + '/user/exchange/phone';
 
-    const result = await HttpUtils2.post(url, {
+    const result = await HttpUtils.post(url, {
         phone,
         code,
         pre_phone,
@@ -289,7 +289,7 @@ export async function getMyNewsCollection(
     const url =
         baseURL + '/news/collect' + objectToQueryStr({ page, page_size });
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data.list : Promise.reject(result);
 }
@@ -306,7 +306,7 @@ export async function getMyVideoCollection(
     const url =
         baseURL + '/video/collect' + objectToQueryStr({ page, page_size });
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data.list : Promise.reject(result);
 }
@@ -323,7 +323,7 @@ export async function getMyNewsFootprintScreen(
     const url =
         baseURL + '/news/browse' + objectToQueryStr({ page, page_size });
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data.list : Promise.reject(result);
 }
@@ -340,7 +340,7 @@ export async function getMyVideoFootprintScreen(
     const url =
         baseURL + '/video/browse' + objectToQueryStr({ page, page_size });
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data.list : Promise.reject(result);
 }
@@ -352,7 +352,7 @@ export async function getMyVideoFootprintScreen(
 export async function postFeedback(content: string): Promise<Boolean> {
     const url = baseURL + '/public/feedback';
 
-    const result = await HttpUtils2.post(url, { content });
+    const result = await HttpUtils.post(url, { content });
 
     return result.code === 200 ? true : false;
 }
@@ -381,7 +381,7 @@ export async function postReport(
 ): Promise<Boolean> {
     const url = baseURL + '/public/report';
 
-    const result = await HttpUtils2.post(url, {
+    const result = await HttpUtils.post(url, {
         report_cat_id: reportType,
         source_type,
         source_id,
@@ -403,7 +403,7 @@ export async function getMyCommentsReplyList(
     const url =
         baseURL + '/user/reply/list' + objectToQueryStr({ page, page_size });
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data.list : Promise.reject(result);
 }
@@ -420,7 +420,7 @@ export async function getSystemNotificationList(
     const url =
         baseURL + '/user/message/list' + objectToQueryStr({ page, page_size });
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data.list : Promise.reject(result);
 }
@@ -444,7 +444,7 @@ export async function replyComment(
 ): Promise<ReplyComment> {
     const url = baseURL + '/reply';
 
-    const result = await HttpUtils2.post(url, {
+    const result = await HttpUtils.post(url, {
         to_type,
         comment_id,
         to_user_id,

@@ -1,4 +1,4 @@
-import HttpUtils2 from '../HttpUtils2';
+import * as HttpUtils from '../HttpUtils';
 import { baseURL, baseSearchURL } from '../url';
 import { objectToQueryStr } from '../utils';
 import { ComplexType, LiveDetail, ArticleDetail, VideoDetail } from './types';
@@ -17,7 +17,7 @@ export async function getLivingList(): Promise<
     }>
 > {
     const url = baseURL + '/live/process/list';
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
     return result.code === 200 ? result.data.list : Promise.reject(result);
 }
 
@@ -26,7 +26,7 @@ export async function getLivingList(): Promise<
  */
 export async function getColumnListData(): Promise<Array<any>> {
     const url = baseURL + '/cp?code=app_news_index_menu';
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
     return result.code === 200 ? result.data.entries : Promise.reject(result);
 }
 
@@ -41,7 +41,7 @@ export async function getVideoList(
 ): Promise<Array<any>> {
     const url = baseURL + '/video/list' + objectToQueryStr({ page, page_size });
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data.entries : Promise.reject(result);
 }
@@ -59,7 +59,7 @@ export async function getNewsList(
 ): Promise<Array<any>> {
     const url = baseURL + newsUrl + `&page=${page}&page_size=${page_size}`;
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data.entries : Promise.reject(result);
 }
@@ -76,7 +76,7 @@ export async function getHomeRecommendList(
 ): Promise<Array<ComplexType>> {
     const url = baseURL + newsUrl + objectToQueryStr({ page, page_size });
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data.entries : Promise.reject(result);
 }
@@ -87,7 +87,7 @@ export async function getHomeRecommendList(
 export async function getCarouselListData() {
     const url = baseURL + '/cp?code=app_news_index_slide';
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data.entries : [];
 }
@@ -106,7 +106,7 @@ export async function getHomeSelectionList(
         '/discovery/recommend' +
         objectToQueryStr({ page, page_size });
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data.list : Promise.reject(result);
 }
@@ -117,7 +117,7 @@ export async function getHomeSelectionList(
 export async function getQichanghaoCarouselListData() {
     const url = baseURL + '/cp?code=app_name_qichang_index_slide';
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data.entries : [];
 }
@@ -133,7 +133,7 @@ export async function getQichanghaoList(
 ): Promise<Array<any>> {
     const url = baseURL + '/media/list' + objectToQueryStr({ page, page_size });
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data.entries : Promise.reject(result);
 }
@@ -152,7 +152,7 @@ export async function getQichanghaoList2(
         '/media/recommend/list' +
         objectToQueryStr({ page, page_size });
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data.list : Promise.reject(result);
 }
@@ -169,7 +169,7 @@ export async function getLiveList(
 ): Promise<Array<any>> {
     const url = baseURL + '/live/list' + objectToQueryStr({ page, page_size });
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data.entries : Promise.reject(result);
 }
@@ -180,7 +180,7 @@ export async function getLiveList(
  */
 export async function getNewsDetailById(id: number): Promise<ArticleDetail> {
     const url = baseURL + '/news?id=' + id;
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
     return result.code === 200 && result.data != null
         ? result.data
         : Promise.reject(result);
@@ -193,7 +193,7 @@ export async function getNewsDetailById(id: number): Promise<ArticleDetail> {
 export async function getVideoDetailById(id: number): Promise<VideoDetail> {
     const url = baseURL + '/video?id=' + id;
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 && result.data != null
         ? result.data
@@ -207,7 +207,7 @@ export async function getVideoDetailById(id: number): Promise<VideoDetail> {
 export async function getLiveDetailById(id: number): Promise<LiveDetail> {
     const url = baseURL + '/live?id=' + id;
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 && result.data != null
         ? result.data
@@ -231,7 +231,7 @@ export async function getLikeStatus(
         '/action/top_count' +
         objectToQueryStr({ source_type, source_id });
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data : Promise.reject(result);
 }
@@ -250,7 +250,7 @@ export async function getCollectStatus(
         '/action/is_collect' +
         objectToQueryStr({ source_type, source_id });
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data : Promise.reject(result);
 }
@@ -269,7 +269,7 @@ export async function getCommentCount(
         '/comment/count' +
         objectToQueryStr({ source_type, source_id });
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data : Promise.reject(result);
 }
@@ -286,7 +286,7 @@ export async function getRecommendedNewsList(
     const url =
         baseSearchURL + '/r' + objectToQueryStr({ source_cat, source_id });
 
-    const result: any = await HttpUtils2.get(url);
+    const result: any = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data : [];
 }
@@ -302,7 +302,7 @@ export async function deleteComment(
 ): Promise<Boolean> {
     const url = baseURL + '/comment/del';
 
-    const result = await HttpUtils2.post(url, {
+    const result = await HttpUtils.post(url, {
         comment_id,
         source_type,
         source_id,
@@ -324,7 +324,7 @@ export async function deleteReplyComment(
 ): Promise<Boolean> {
     const url = baseURL + '/reply/del';
 
-    const result = await HttpUtils2.post(url, {
+    const result = await HttpUtils.post(url, {
         reply_id,
         source_type,
         source_id,
@@ -351,7 +351,7 @@ export async function getCommentsList(
         '/comment/list' +
         objectToQueryStr({ source_type, source_id, page, page_size });
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data.entries : [];
 }
@@ -370,7 +370,7 @@ export async function postComment(
 ): Promise<Comment> {
     const url = baseURL + '/comment';
 
-    const result = await HttpUtils2.post(url, {
+    const result = await HttpUtils.post(url, {
         source_type,
         source_id,
         content,
@@ -395,7 +395,7 @@ export async function getCommentRelyList(
         '/reply/list' +
         objectToQueryStr({ comment_id, page, page_size });
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data.entries : [];
 }
@@ -411,7 +411,7 @@ export async function postCollect(
 ): Promise<Boolean> {
     const url = baseURL + '/action/collect';
 
-    const result = await HttpUtils2.post(url, { source_type, source_id });
+    const result = await HttpUtils.post(url, { source_type, source_id });
 
     return result.code === 200 ? result.data : false;
 }
@@ -434,7 +434,7 @@ export async function replyComment(
 ): Promise<ReplyComment> {
     const url = baseURL + '/reply';
 
-    const result = await HttpUtils2.post(url, {
+    const result = await HttpUtils.post(url, {
         to_type,
         comment_id,
         to_user_id,
@@ -460,7 +460,7 @@ export async function postLike(
     } else {
         const url = baseURL + '/action/top';
 
-        const result = await HttpUtils2.post(url, { source_type, source_id });
+        const result = await HttpUtils.post(url, { source_type, source_id });
 
         return result.code === 200 ? true : false;
     }
@@ -473,7 +473,7 @@ export async function postLike(
 export async function postLikeComment(comment_id: number): Promise<Boolean> {
     const url = baseURL + '/comment/top';
 
-    const result = await HttpUtils2.post(url, { comment_id });
+    const result = await HttpUtils.post(url, { comment_id });
 
     return result.code === 200 ? true : false;
 }
@@ -504,7 +504,7 @@ export async function getUserDetailListData(
         '/user/info' +
         objectToQueryStr({ user_id: userId, page: page, page_size: page_size });
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data.list : Promise.reject(result);
 }
@@ -525,7 +525,7 @@ export async function getUserDetail(
         '/user/info' +
         objectToQueryStr({ user_id: userId, page: 1, page_size: 1 });
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200
         ? result.data.user || {}
@@ -540,7 +540,7 @@ export const Search = {
     async getHotCarModals() {
         const url = baseURL + '/cars/hot_cars';
 
-        let result = await HttpUtils2.get(url);
+        let result = await HttpUtils.get(url);
 
         return result.code === 200 ? result.data : Promise.reject(result);
     },
@@ -556,7 +556,7 @@ export const Search = {
     > {
         const url = baseURL + '/keyword/hot';
 
-        let result = await HttpUtils2.get(url);
+        let result = await HttpUtils.get(url);
 
         return result.code === 200 ? result.data.list : Promise.reject(result);
     },
@@ -569,7 +569,7 @@ export const Search = {
         const url =
             baseURL + '/keyword/like' + objectToQueryStr({ query_value: key });
 
-        const result = await HttpUtils2.get(url);
+        const result = await HttpUtils.get(url);
 
         return result.code === 200 ? result.data.list : [];
     },
@@ -595,7 +595,7 @@ export const Search = {
 
         const url = baseSearchURL + '/search/list' + queryStr;
 
-        const result = await HttpUtils2.get(url);
+        const result = await HttpUtils.get(url);
 
         return result.code === 200 ? result.data.list : Promise.reject(result);
     },
@@ -622,7 +622,7 @@ export const Search = {
 
         const url = baseSearchURL + '/search/content' + queryStr;
 
-        const result = await HttpUtils2.get(url);
+        const result = await HttpUtils.get(url);
 
         return result.code === 200 ? result.data : Promise.reject(result);
     },
@@ -644,7 +644,7 @@ export async function getLiveGallery(
 }> {
     const url = baseURL + '/album' + objectToQueryStr({ id, page, page_size });
 
-    const result = await HttpUtils2.get(url);
+    const result = await HttpUtils.get(url);
 
     return result.code === 200 ? result.data : Promise.reject(result);
 }

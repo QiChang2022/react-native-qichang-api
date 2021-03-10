@@ -1,6 +1,6 @@
 {
   "name": "react-native-qichang-api",
-  "version": "0.7.2",
+  "version": "1.0.0",
   "description": "汽场App api",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",

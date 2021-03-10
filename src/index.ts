@@ -12,14 +12,14 @@ import * as types from './types';
 
 import { setURL } from './url';
 
-import * as HttpUtils2 from './HttpUtils2';
+import * as HttpUtils from './HttpUtils';
 
 export {
     UserAPI,
     types,
     setURL,
     API,
-    HttpUtils2,
+    HttpUtils,
     ModelLibraryAPI,
     NewsAPI,
     DiscoveryAPI,

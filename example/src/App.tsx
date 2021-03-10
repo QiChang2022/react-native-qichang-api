@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
 
-import { API, setURL, HttpUtils2 } from 'react-native-qichang-api';
+import { API, setURL, HttpUtils } from 'react-native-qichang-api';
 
 import {
     getVersion,
@@ -10,7 +10,7 @@ import {
     getDeviceId,
 } from 'react-native-device-info';
 
-HttpUtils2.setHeaders(getVersion(), getDeviceId(), getSystemVersion());
+HttpUtils.setHeaders(getVersion(), getDeviceId(), getSystemVersion());
 
 setURL('http://api-app.qichangv.com', 'http://api-search.qichangv.com');
 
