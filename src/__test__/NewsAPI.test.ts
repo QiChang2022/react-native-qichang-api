@@ -80,3 +80,21 @@ describe('详情 活动悬浮框', () => {
         testFloatConfig(videoDetail);
     });
 });
+
+describe('搜索', () => {
+    test('搜索 所有', async () => {
+        let result = await NewsAPI.Search.searchAll('11');
+        //console.log(result);
+        expect('user_list' in result).toBeTruthy();
+        expect('video_list' in result).toBeTruthy();
+        expect('live_list' in result).toBeTruthy();
+        expect('series_list' in result).toBeTruthy();
+        expect('news_list' in result).toBeTruthy();
+    });
+
+    test('搜索 用户', async () => {
+        let result = await NewsAPI.Search.search(1, 10, '11', Source_Cat.user);
+        //console.log(result);
+        expect(result.length).toBe(10);
+    });
+});

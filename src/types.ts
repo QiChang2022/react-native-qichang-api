@@ -24,5 +24,5 @@ export enum Source_Cat {
 
     subject = 14, //专题 跳转 专题 页面
 
-    column = 20, //专栏
+    user = 20, //用户
 }
