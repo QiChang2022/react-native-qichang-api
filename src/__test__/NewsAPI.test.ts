@@ -93,8 +93,31 @@ describe('搜索', () => {
     });
 
     test('搜索 用户', async () => {
-        let result = await NewsAPI.Search.search(1, 10, '11', Source_Cat.user);
+        let result = await NewsAPI.Search.search(1, 10, '刘', Source_Cat.user);
         //console.log(result);
-        expect(result.length).toBe(10);
+        expect(result.length).toBeGreaterThan(1);
+    });
+});
+
+describe('用户详情数据', () => {
+    let userId = 85; //刘宠的ID
+
+    test('所有数据', async () => {
+        let data = await NewsAPI.getUserDetailListData(1, 10, userId, 'all');
+        expect(data.length).toBe(10);
+    });
+    test('所有数据都是文章数据', async () => {
+        let data = await NewsAPI.getUserDetailListData(1, 10, userId, 'news');
+        expect(data.length).toBe(10);
+        data.forEach((x) => {
+            expect(x.record_type).toBe(1);
+        });
+    });
+    test('所有数据都是视频数据 ', async () => {
+        let data = await NewsAPI.getUserDetailListData(1, 10, userId, 'video');
+        expect(data.length).toBe(10);
+        data.forEach((x) => {
+            expect(x.record_type).toBe(6);
+        });
     });
 });

@@ -485,13 +485,18 @@ export async function postLikeComment(comment_id: number): Promise<Boolean> {
 }
 
 /**
- *
- * 用户 发布的文章或视频列表数据
+ * 用户 发布的所有,文章,视频列表数据
+ * @param page : 当前页
+ * @param page_size ：每页大小
+ * @param userId : 用户ID
+ * @param type : 类型  all 所有， news 新闻，video 视频
+ * @returns
  */
 export async function getUserDetailListData(
     page: number,
     page_size: number,
-    userId: number
+    userId: number,
+    type: 'all' | 'news' | 'video' = 'all'
 ): Promise<
     Array<{
         cover: string; //图片
@@ -505,10 +510,25 @@ export async function getUserDetailListData(
         duration: string;
     }>
 > {
-    const url =
-        baseURL +
-        '/user/info' +
-        objectToQueryStr({ user_id: userId, page: page, page_size: page_size });
+    let url: string;
+
+    if (type === 'news' || type === 'video') {
+        url = `${baseURL}/user/info/part${objectToQueryStr({
+            user_id: userId,
+            operate_type: type,
+            page: page,
+            page_size: page_size,
+        })}`;
+    } else {
+        url =
+            baseURL +
+            '/user/info' +
+            objectToQueryStr({
+                user_id: userId,
+                page: page,
+                page_size: page_size,
+            });
+    }
 
     const result = await HttpUtils.get(url);
 
