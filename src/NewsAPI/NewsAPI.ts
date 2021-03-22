@@ -506,6 +506,9 @@ export async function getUserDetailListData(
             comment: number;
             browse: number;
         };
+        user: {
+            name: string;
+        };
         record_type: number; // 1:文章,6:视频
         duration: string;
     }>
