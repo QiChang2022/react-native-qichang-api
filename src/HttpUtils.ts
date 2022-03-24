@@ -1,6 +1,6 @@
 import { Platform, DeviceEventEmitter } from 'react-native';
 
-let headers = {
+let headers: any = {
     'User-Token': '',
     'User-Source': 'qcv_app',
     'app-version': '', //App版本号
@@ -14,6 +14,10 @@ const UserTokenInvalidNotification = 'UserTokenInvalidNotification';
 
 export function setHeadersToken(token: string) {
     headers['User-Token'] = token;
+}
+
+export function setHeadersUserCode(code: string) {
+    headers['User-Code'] = code;
 }
 
 export function setHeaders(

@@ -31,7 +31,10 @@ export async function getStartScreenImage(
 /**
  * 开屏广告
  */
-export async function getStartAd(): Promise<{
+export async function getStartAd(params?: {
+    longitude: number;
+    latitude: number;
+}): Promise<{
     ad: {
         id: number; //
         cover: string; //图片地址
@@ -39,6 +42,7 @@ export async function getStartAd(): Promise<{
         source_cat: number;
         source_id: number;
     };
+    user_code: string;
     ios_version?: {
         is_force: number; // 11强制更新
     };
@@ -50,7 +54,7 @@ export async function getStartAd(): Promise<{
     share_host: string; //用户分享
     official_host: string; // 用于 关于我们,用户协议
 }> {
-    const url = baseURL + '/index/sync';
+    const url = baseURL + '/index/sync' + objectToQueryStr(params);
 
     const result = await HttpUtils.get(url);
 
