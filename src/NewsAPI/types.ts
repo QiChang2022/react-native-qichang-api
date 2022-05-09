@@ -118,6 +118,8 @@ export type LiveDetail = {
     chat_room_web_url: string;
 
     float_config: FloatConfig; //控制是否显示活动悬浮框
+
+    is_book: number; // 0 未预约
 };
 
 //文章详情

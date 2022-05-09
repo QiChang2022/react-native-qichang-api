@@ -221,6 +221,32 @@ export async function getLiveDetailById(id: number): Promise<LiveDetail> {
 }
 
 /**
+ * 直播预约
+ * @param live_id
+ * @returns
+ */
+export async function postLiveBook(live_id: number) {
+    const url = baseURL + '/live/book';
+
+    const result = await HttpUtils.post(url, { live_id });
+
+    return result.code === 200 ? true : false;
+}
+
+/**
+ * 直播预约取消
+ * @param live_id
+ * @returns
+ */
+export async function postLiveBookCancel(live_id: number) {
+    const url = baseURL + '/live/book/cancel';
+
+    const result = await HttpUtils.post(url, { live_id });
+
+    return result.code === 200 ? true : false;
+}
+
+/**
  * 获取点赞状态,和数量
  * @param source_type
  * @param source_id
